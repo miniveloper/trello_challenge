@@ -13,6 +13,7 @@ const Wrapper = styled.div`
   min-height: 300px;
   display: flex;
   flex-direction: column;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
 `;
 
 const Title = styled.h2`
@@ -36,8 +37,19 @@ const Area = styled.div<IArea>`
 
 const Form = styled.form`
   width: 100%;
+  display: flex;
+  justify-content: center;
+  padding-bottom: 10px;
   input {
     width: 100%;
+    font-size: 16px;
+    border: 0;
+    background-color: white;
+    width: 80%;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    margin: 0 auto;
   }
 `;
 
