@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { toDoState } from "./atoms";
 import Board from "./Components/Board";
 import TrashCan from "./Components/TrashCan";
+import Clock from "./Components/Clock";
 
 const Content = styled.div`
   display: flex;
@@ -29,10 +30,21 @@ const Widget = styled.div`
 
   width: 25vw;
   height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
+  display: grid;
+  grid-template-columns: 1fr;
+  place-items: center center;
   z-index: 999;
+`;
+
+const WidgetBox = styled.div`
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  border: 1px solid white;
+  width: 80%;
+  height: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const Boards = styled.div`
@@ -130,8 +142,16 @@ function App() {
           </Boards>
         </Wrapper>
         <Widget>
-          <div>시계</div>
-          <div>마신 물</div>
+          <WidgetBox>
+            <Clock />
+          </WidgetBox>
+          <WidgetBox>
+            <div>시계</div>
+          </WidgetBox>
+
+          <WidgetBox>
+            <div>마신 물</div>
+          </WidgetBox>
           <TrashCan />
         </Widget>
       </Content>
