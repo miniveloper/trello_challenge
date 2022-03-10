@@ -32,7 +32,23 @@ const Area = styled.div<IArea>`
       : "transparent"};
   flex-grow: 1;
   transition: background-color 0.2s ease-in-out;
-  padding: 20px;
+  padding: 20px 15px 20px 20px;
+  max-height: 485px;
+
+  overflow-y: scroll;
+  &:hover {
+    &::-webkit-scrollbar-thumb {
+      background-color: #718093;
+    }
+  }
+
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius: 20px;
+    border: 6px solid transparent;
+  }
 `;
 
 const Form = styled.form`
@@ -70,12 +86,21 @@ interface IForm {
 function Board({ toDos, boardId }: IBoard) {
   const setToDos = useSetRecoilState(toDoState);
   const { register, setValue, handleSubmit } = useForm<IForm>();
+
   const onValid = ({ toDo }: IForm) => {
     const newToDo = {
       id: Date.now(),
       text: toDo,
     };
     setToDos((allBoards) => {
+      localStorage.setItem(
+        "boards",
+        JSON.stringify({
+          ...allBoards,
+          [boardId]: [newToDo, ...allBoards[boardId]],
+        })
+      );
+
       return {
         ...allBoards,
         [boardId]: [newToDo, ...allBoards[boardId]],
@@ -101,6 +126,7 @@ function Board({ toDos, boardId }: IBoard) {
             isDraggingFromThis={Boolean(info.draggingFromThisWith)}
             ref={magic.innerRef}
             {...magic.droppableProps}
+            // {areaRef.current?.clientHeight > 485 && scroll}
           >
             {toDos.map((toDo, index) => (
               <DraggableCard

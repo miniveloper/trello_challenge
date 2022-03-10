@@ -34,7 +34,7 @@ footer, header, hgroup, main, menu, nav, section {
 }
 /* HTML5 hidden-attribute fix for newer browsers */
 *[hidden] {
-    display: none;
+  display: none;
 }
 body {
   line-height: 1;
@@ -60,7 +60,6 @@ table {
 body {
   font-weight: 300;
   font-family: 'Source Sans Pro', sans-serif;
-  background-color:${(props) => props.theme.bgColor};
   color: black;
   line-height: 1.2;
 }
