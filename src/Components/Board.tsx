@@ -33,7 +33,7 @@ const Area = styled.div<IArea>`
   flex-grow: 1;
   transition: background-color 0.2s ease-in-out;
   padding: 20px 15px 20px 20px;
-  max-height: 485px;
+  max-height: 445px;
 
   overflow-y: scroll;
   &:hover {
