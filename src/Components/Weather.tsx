@@ -22,6 +22,7 @@ const Wrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: right;
+  margin-bottom: 15px;
 `;
 
 const Container = styled.div`
@@ -34,6 +35,7 @@ const Container = styled.div`
   align-items: space-between;
   padding: 0 30px;
   padding-top: 20px;
+  text-shadow: 2px 2px rgba(0, 0, 0, 0.5);
 `;
 
 const Icon = styled.span`
@@ -43,6 +45,7 @@ const Icon = styled.span`
     height: 36px;
     vertical-align: top;
     padding: 0 10px;
+    text-shadow: 2px 2px rgba(0, 0, 0, 0.5);
   }
 `;
 

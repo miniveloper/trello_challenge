@@ -7,6 +7,7 @@ import Board from "./Components/Board";
 import TrashCan from "./Components/TrashCan";
 import Clock from "./Components/Clock";
 import Weather from "./Components/Weather";
+import Calender from "./Components/Calender";
 
 const Content = styled.div`
   position: relative;
@@ -50,14 +51,13 @@ const Widget = styled.div`
 
 const WidgetBox = styled.div`
   background-color: transparent;
-  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
   border-radius: 7px;
-  width: 80%;
-  height: 20%;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 30px 0 0 0;
+  margin: 15px 0;
+  text-shadow: 2px 2px rgba(0, 0, 0, 0.5);
 `;
 
 const TempWidget = styled.span`
@@ -166,15 +166,11 @@ function App() {
 
         <Widget>
           <Weather />
-          <WidgetBox style={{ height: "10vh" }}>
+          <WidgetBox>
             <Clock />
           </WidgetBox>
           <WidgetBox>
-            <div>시계</div>
-          </WidgetBox>
-
-          <WidgetBox>
-            <div>마신 물</div>
+            <Calender />
           </WidgetBox>
         </Widget>
       </Content>
