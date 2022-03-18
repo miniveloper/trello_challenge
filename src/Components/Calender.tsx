@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import moment from "moment";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BsCaretLeftFill, BsCaretRightFill } from "react-icons/bs";
 
 const Wrapper = styled.div`
@@ -52,22 +52,30 @@ const TableRow = styled.tr`
 
 const TableData = styled.td`
   display: flex;
-  width: 5%;
-  height: 5%;
+  width: 100%;
+  padding: 5px 0;
   justify-content: center;
   align-items: center;
   color: white;
+  border-radius: 10px;
+  transition: background-color 0.15s ease-in-out;
+  cursor: pointer;
+
+  &:hover {
+    background-color: rgba(209, 216, 224, 0.4);
+    border-radius: 8px;
+  }
 `;
 
 const DaysData = styled.td`
   display: flex;
-  width: 5%;
-  height: 5%;
+  width: 100%;
   justify-content: center;
   align-items: center;
   color: white;
+  font-weight: 400;
   &:first-child {
-    color: #fc5c65;
+    color: #f78fb3;
   }
   &:last-child {
     color: #2bcbba;
@@ -75,6 +83,9 @@ const DaysData = styled.td`
 `;
 
 function Calender() {
+  const HOLIDAY_API_KEY =
+    "EOZd3IRPE%2BLZivWRWYW%2BC1ekzk%2BjgpXQXVmPVP%2Beu%2BnkrNSTZZBYlRQLDSKl%2BjZE2q%2F%2BUBs2awMAq82WKHONJA%3D%3D";
+
   const [getMoment, setMoment] = useState(moment());
   const days = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
   const today = getMoment;
@@ -106,12 +117,13 @@ function Calender() {
                     key={index}
                     style={{
                       color: "#f7b731",
+                      fontWeight: "600",
                     }}
                   >
                     <span>{dates.format("D")}</span>
                   </TableData>
                 );
-              } else if (moment().format("MM") !== dates.format("MM")) {
+              } else if (dates.format("MM") !== today.format("MM")) {
                 return (
                   <TableData key={index} style={{ color: "#a5b1c2" }}>
                     <span>{dates.format("D")}</span>

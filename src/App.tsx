@@ -33,6 +33,7 @@ const Widget = styled.div`
   background-color: rgba(20, 80, 158, 0.795);
 
   width: 30vw;
+  min-width: 270px;
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -44,9 +45,6 @@ const Widget = styled.div`
   &::-webkit-scrollbar {
     display: none;
   }
-
-  &:first-child {
-  }
 `;
 
 const WidgetBox = styled.div`
@@ -57,7 +55,6 @@ const WidgetBox = styled.div`
   justify-content: center;
   align-items: center;
   margin: 15px 0;
-  text-shadow: 2px 2px rgba(0, 0, 0, 0.5);
 `;
 
 const TempWidget = styled.span`

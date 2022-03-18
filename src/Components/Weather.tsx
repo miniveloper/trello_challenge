@@ -4,18 +4,23 @@ import {
   WiCloud,
   WiCloudy,
   WiDayCloudy,
+  WiDayRain,
   WiDayRainMix,
   WiDaySunny,
   WiDaySunnyOvercast,
+  WiDayThunderstorm,
   WiFog,
   WiHot,
   WiRain,
+  WiRainMix,
   WiSnow,
   WiSnowflakeCold,
   WiThunderstorm,
 } from "react-icons/wi";
 import { useRecoilState } from "recoil";
 import { weatherState } from "../atoms";
+import { useQuery } from "react-query";
+import { fetchHolidays } from "../api";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -35,7 +40,6 @@ const Container = styled.div`
   align-items: space-between;
   padding: 0 30px;
   padding-top: 20px;
-  text-shadow: 2px 2px rgba(0, 0, 0, 0.5);
 `;
 
 const Icon = styled.span`
@@ -45,7 +49,6 @@ const Icon = styled.span`
     height: 36px;
     vertical-align: top;
     padding: 0 10px;
-    text-shadow: 2px 2px rgba(0, 0, 0, 0.5);
   }
 `;
 
@@ -81,10 +84,8 @@ function Weather() {
   const [temp, setTemp] = useState<ITemp>();
   const [weather, setWeather] = useState<IWeather>();
   const [name, setName] = useState("");
-  const [icon, setIcon] = useState("");
 
-  const API_KEY = "aa0e3fd16c9e2ed8ed253b5986b3ce7a";
-
+  const WEATHER_API_KEY = "aa0e3fd16c9e2ed8ed253b5986b3ce7a";
   function handleSuccess(position: any) {
     const lat = position.coords.latitude;
     const lon = position.coords.longitude;
@@ -92,28 +93,52 @@ function Weather() {
       lat,
       lon,
     };
+
     getWeather(lat, lon);
   }
-
   function handleError() {
     console.log("Error");
   }
-
   function requestCoords() {
     navigator.geolocation.getCurrentPosition(handleSuccess, handleError);
   }
-
   const getWeather = async (lat: number, lon: number) => {
     const json = await (
       await fetch(
-        `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`
+        `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${WEATHER_API_KEY}&units=metric`
       )
     ).json();
     setWeather(json.weather[0]);
     setTemp(json.main);
     setName(json.name);
-    setIcon(json.weather[0].description);
-    console.log(json);
+  };
+
+  const getIcon = () => {
+    let icon = weather?.description;
+    switch (icon) {
+      case "clear sky":
+        return <WiDaySunny />;
+      case "few clouds":
+        return <WiDayCloudy />;
+      case "scattered clouds":
+        return <WiCloud />;
+      case "broken clouds":
+        return <WiCloudy />;
+      case "overcast clouds":
+        return <WiDaySunnyOvercast />;
+      case "shower rain":
+        return <WiRain />;
+      case "rain":
+        return <WiDayRainMix />;
+      case "light rain":
+        return <WiRainMix />;
+      case "thunderstrom":
+        return <WiThunderstorm />;
+      case "snow":
+        return <WiSnow />;
+      case "fog":
+        return <WiFog />;
+    }
   };
 
   useEffect(() => {
@@ -125,7 +150,7 @@ function Weather() {
       <Container>
         <WeatherBox>
           <Icon>
-            {icon === "clear sky" ? (
+            {/* {icon === "clear sky" ? (
               <WiDaySunny />
             ) : icon === "few clouds" ? (
               <WiDayCloudy />
@@ -145,7 +170,8 @@ function Weather() {
               <WiSnow />
             ) : (
               <WiFog />
-            )}
+            )} */}
+            {getIcon()}
           </Icon>
           <Temperature>{temp?.temp}°</Temperature>
         </WeatherBox>

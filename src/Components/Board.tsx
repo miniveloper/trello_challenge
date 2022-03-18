@@ -34,6 +34,8 @@ const Area = styled.div<IArea>`
   transition: background-color 0.2s ease-in-out;
   padding: 20px 15px 20px 20px;
   max-height: 445px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
 
   overflow-y: scroll;
   &:hover {
@@ -49,6 +51,7 @@ const Area = styled.div<IArea>`
     border-radius: 20px;
     border: 6px solid transparent;
   }
+  transition: all 0.2s ease-in-out;
 `;
 
 const Form = styled.form`
