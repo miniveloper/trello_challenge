@@ -76,7 +76,6 @@ const Boards = styled.div`
 
 function Home() {
   const { dates } = useParams();
-  console.log(dates);
 
   const [toDos, setToDos] = useRecoilState(toDoState);
   const onDragEnd = (info: DropResult) => {
@@ -154,7 +153,11 @@ function Home() {
       console.log(parsedData);
       setToDos(parsedData);
     } else {
-      setToDos({});
+      setToDos({
+        "To Do": [],
+        Doing: [],
+        Done: [],
+      });
     }
   }, [dates]);
 
