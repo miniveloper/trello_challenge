@@ -80,16 +80,16 @@ interface IArea {
 interface IBoard {
   toDos: ITodo[];
   boardId: string;
+  dates?: string;
 }
 
 interface IForm {
   toDo: string;
 }
 
-function Board({ toDos, boardId }: IBoard) {
+function Board({ toDos, boardId, dates }: IBoard) {
   const setToDos = useSetRecoilState(toDoState);
   const { register, setValue, handleSubmit } = useForm<IForm>();
-
   const onValid = ({ toDo }: IForm) => {
     const newToDo = {
       id: Date.now(),
@@ -97,7 +97,7 @@ function Board({ toDos, boardId }: IBoard) {
     };
     setToDos((allBoards) => {
       localStorage.setItem(
-        "boards",
+        `${dates}`,
         JSON.stringify({
           ...allBoards,
           [boardId]: [newToDo, ...allBoards[boardId]],
@@ -129,6 +129,7 @@ function Board({ toDos, boardId }: IBoard) {
             isDraggingFromThis={Boolean(info.draggingFromThisWith)}
             ref={magic.innerRef}
             {...magic.droppableProps}
+
             // {areaRef.current?.clientHeight > 485 && scroll}
           >
             {toDos.map((toDo, index) => (

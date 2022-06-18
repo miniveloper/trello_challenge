@@ -2,6 +2,7 @@ import styled from "styled-components";
 import moment from "moment";
 import { useEffect, useState } from "react";
 import { BsCaretLeftFill, BsCaretRightFill } from "react-icons/bs";
+import { Link, useParams } from "react-router-dom";
 
 const Wrapper = styled.div`
   display: flex;
@@ -51,11 +52,11 @@ const TableRow = styled.tr`
 `;
 
 const TableData = styled.td`
-  display: flex;
+  display: block;
   width: 100%;
+  height: 100%;
   padding: 5px 0;
-  justify-content: center;
-  align-items: center;
+  text-align: center;
   color: white;
   border-radius: 10px;
   transition: background-color 0.15s ease-in-out;
@@ -83,6 +84,8 @@ const DaysData = styled.td`
 `;
 
 function Calender() {
+  const { date } = useParams();
+
   const HOLIDAY_API_KEY =
     "EOZd3IRPE%2BLZivWRWYW%2BC1ekzk%2BjgpXQXVmPVP%2Beu%2BnkrNSTZZBYlRQLDSKl%2BjZE2q%2F%2BUBs2awMAq82WKHONJA%3D%3D";
 
@@ -120,19 +123,25 @@ function Calender() {
                       fontWeight: "600",
                     }}
                   >
-                    <span>{dates.format("D")}</span>
+                    <Link to={`/${dates.format("YYYYMMDD")}`}>
+                      <div>{dates.format("D")}</div>
+                    </Link>
                   </TableData>
                 );
               } else if (dates.format("MM") !== today.format("MM")) {
                 return (
                   <TableData key={index} style={{ color: "#a5b1c2" }}>
-                    <span>{dates.format("D")}</span>
+                    <Link to={`/${dates.format("YYYYMMDD")}`}>
+                      <div>{dates.format("D")}</div>
+                    </Link>
                   </TableData>
                 );
               } else {
                 return (
                   <TableData key={index}>
-                    <span>{dates.format("D")}</span>
+                    <Link to={`/${dates.format("YYYYMMDD")}`}>
+                      <div>{dates.format("D")}</div>
+                    </Link>
                   </TableData>
                 );
               }
