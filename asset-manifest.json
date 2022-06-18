@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.js": "/trello_challenge/static/js/main.a608c700.js",
-    "index.html": "/trello_challenge/index.html",
-    "main.a608c700.js.map": "/trello_challenge/static/js/main.a608c700.js.map"
+    "main.js": "/toDotoDo/static/js/main.f189024e.js",
+    "index.html": "/toDotoDo/index.html",
+    "main.f189024e.js.map": "/toDotoDo/static/js/main.f189024e.js.map"
   },
   "entrypoints": [
-    "static/js/main.a608c700.js"
+    "static/js/main.f189024e.js"
   ]
 }
