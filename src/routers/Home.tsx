@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { DragDropContext, DropResult } from "react-beautiful-dnd";
 import { useRecoilState } from "recoil";
 import styled from "styled-components";
@@ -9,6 +9,9 @@ import Clock from "../Components/Clock";
 import Weather from "../Components/Weather";
 import Calender from "../Components/Calender";
 import { useParams } from "react-router-dom";
+import { faBars } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { isMobile } from "react-device-detect";
 
 const Content = styled.div`
   position: relative;
@@ -18,7 +21,7 @@ const Content = styled.div`
   align-items: center;
 `;
 
-const Wrapper = styled.div`
+const Wrapper = styled.div<IWidget>`
   position: relative;
   display: flex;
   width: 100vw;
@@ -28,9 +31,27 @@ const Wrapper = styled.div`
   align-items: center;
   height: 100vh;
   background-color: ${(props) => props.theme.bgColor};
+
+  @media screen and (max-width: 480px) {
+    height: 100%;
+
+    filter: ${(props) => (props.activate ? "blur(5px)" : "none")};
+  }
 `;
 
-const Widget = styled.div`
+const Nav = styled.nav`
+  display: none;
+
+  @media screen and (max-width: 480px) {
+    display: flex;
+    height: 10vh;
+    font-size: 36px;
+    color: white;
+    align-items: center;
+  }
+`;
+
+const Widget = styled.div<IWidget>`
   background-color: rgba(20, 80, 158, 0.795);
 
   width: 30vw;
@@ -45,6 +66,15 @@ const Widget = styled.div`
 
   &::-webkit-scrollbar {
     display: none;
+  }
+
+  @media screen and (max-width: 480px) {
+    display: ${(props) => (props.activate ? "block" : "none")};
+    width: 80%;
+    position: absolute;
+    right: 0;
+    top: 0;
+    background-color: rgba(7, 12, 19, 1);
   }
 `;
 
@@ -72,11 +102,21 @@ const Boards = styled.div`
   align-items: flex-start;
   width: 80vw;
   gap: 30px;
+
+  @media screen and (max-width: 480px) {
+    flex-direction: column;
+    align-items: center;
+  }
 `;
+
+interface IWidget {
+  activate: boolean;
+}
 
 function Home() {
   const { dates } = useParams();
 
+  const [widget, setWidget] = useState<boolean>(false);
   const [toDos, setToDos] = useRecoilState(toDoState);
   const onDragEnd = (info: DropResult) => {
     const { destination, source } = info;
@@ -145,6 +185,14 @@ function Home() {
     }
   };
 
+  // 모바일 환경에서 Bars 아이콘 클릭 시 위젯 활성화
+  const barsOnClick = () => setWidget((props) => !props);
+  const isMobileActivate = () => {
+    if (isMobile && widget) {
+      setWidget((props) => !props);
+    }
+  };
+
   useEffect(() => {
     const storage = localStorage.getItem(`${dates}`);
 
@@ -164,7 +212,10 @@ function Home() {
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <Content>
-        <Wrapper>
+        <Wrapper activate={widget} onClick={isMobileActivate}>
+          <Nav>
+            <FontAwesomeIcon icon={faBars} onClick={barsOnClick} />
+          </Nav>
           <Boards>
             {Object.keys(toDos).map((boardId) => (
               <Board
@@ -178,7 +229,7 @@ function Home() {
           <TrashCan />
         </Wrapper>
 
-        <Widget>
+        <Widget activate={widget}>
           <Weather />
           <WidgetBox>
             <Clock />

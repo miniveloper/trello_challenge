@@ -14,6 +14,10 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+
+  @media screen and (max-width: 480px) {
+    width: 80%;
+  }
 `;
 
 const Title = styled.h2`
