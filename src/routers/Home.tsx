@@ -188,7 +188,7 @@ function Home() {
   // 모바일 환경에서 Bars 아이콘 클릭 시 위젯 활성화
   const barsOnClick = () => setWidget((props) => !props);
   const isMobileActivate = () => {
-    if (isMobile && widget) {
+    if (widget) {
       setWidget((props) => !props);
     }
   };
@@ -198,7 +198,6 @@ function Home() {
 
     if (storage !== null) {
       const parsedData = JSON.parse(storage);
-      console.log(parsedData);
       setToDos(parsedData);
     } else {
       setToDos({
@@ -212,7 +211,10 @@ function Home() {
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <Content>
-        <Wrapper activate={widget} onClick={isMobileActivate}>
+        <Wrapper
+          activate={widget}
+          {...(isMobile && { onClick: isMobileActivate })}
+        >
           <Nav>
             <FontAwesomeIcon icon={faBars} onClick={barsOnClick} />
           </Nav>

@@ -7,10 +7,10 @@ function App() {
   console.log(today);
 
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={process.env.PUBLIC_URL}>
       <Routes>
-        <Route path="/toDotoDo" element={<Home />}>
-          <Route path="/toDotoDo/:dates" element={<Home />} />
+        <Route path="/" element={<Home />}>
+          <Route path="/:dates" element={<Home />} />
         </Route>
       </Routes>
     </BrowserRouter>

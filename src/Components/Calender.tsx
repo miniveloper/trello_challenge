@@ -134,7 +134,7 @@ function Calender() {
                       fontWeight: "600",
                     }}
                   >
-                    <Link to={`/toDotoDo/${dates.format("YYYYMMDD")}`}>
+                    <Link to={`/${dates.format("YYYYMMDD")}`}>
                       <div style={{ height: "100%", width: "100%" }}>
                         {dates.format("D")}
                       </div>
@@ -144,7 +144,7 @@ function Calender() {
               } else if (dates.format("MM") !== today.format("MM")) {
                 return (
                   <TableData key={index} style={{ color: "#a5b1c2" }}>
-                    <Link to={`/toDotoDo/${dates.format("YYYYMMDD")}`}>
+                    <Link to={`/${dates.format("YYYYMMDD")}`}>
                       <div>{dates.format("D")}</div>
                     </Link>
                   </TableData>
@@ -152,7 +152,7 @@ function Calender() {
               } else {
                 return (
                   <TableData key={index}>
-                    <Link to={`/toDotoDo/${dates.format("YYYYMMDD")}`}>
+                    <Link to={`/${dates.format("YYYYMMDD")}`}>
                       <div>{dates.format("D")}</div>
                     </Link>
                   </TableData>
