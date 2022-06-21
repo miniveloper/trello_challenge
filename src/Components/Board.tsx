@@ -138,6 +138,7 @@ function Board({ toDos, boardId, dates }: IBoard) {
           >
             {toDos.map((toDo, index) => (
               <DraggableCard
+                boardId={boardId}
                 key={toDo.id}
                 toDoId={toDo.id}
                 index={index}

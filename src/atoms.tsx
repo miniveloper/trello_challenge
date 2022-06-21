@@ -1,7 +1,5 @@
 import { atom } from "recoil";
 import { WiCloud, WiDayCloudy, WiDaySunny } from "react-icons/wi";
-import moment from "moment";
-import { useParams } from "react-router-dom";
 
 export interface ITodo {
   id: number;
@@ -20,23 +18,6 @@ interface ITrash {
 interface IWeather {
   [key: string]: string;
 }
-
-// interface IToday {
-//   id: number;
-//   date: number;
-// }
-
-// export const today = atom<IToday>({
-//   key: "today",
-//   default: {
-//     d: any,
-//   },
-// });
-
-// export const datesState = atom({
-//   key: "dates",
-//   default: "20220617",
-// });
 
 export const toDoState = atom<IToDoState>({
   // key: `${datesState}`,
