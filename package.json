@@ -63,5 +63,5 @@
     "@types/styled-components": "^5.1.24",
     "gh-pages": "^3.2.3"
   },
-  "homepage": "http://seongminn.github.io/toDotoDo"
+  "homepage": "http://seongminn.github.io/toDotoDo/"
 }

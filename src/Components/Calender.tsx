@@ -48,15 +48,16 @@ const TableRow = styled.tr`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 0;
+  padding: 5px 0;
 `;
 
 const TableData = styled.td`
   display: block;
   width: 100%;
   height: 100%;
-  padding: 5px 0;
   text-align: center;
+  margin: 0 2px;
+
   color: white;
   border-radius: 10px;
   transition: background-color 0.15s ease-in-out;
@@ -65,6 +66,16 @@ const TableData = styled.td`
   &:hover {
     background-color: rgba(209, 216, 224, 0.4);
     border-radius: 8px;
+  }
+
+  & a,
+  & a div {
+    display: flex;
+    width: 100%;
+    height: 1.7em;
+    min-height: 25px;
+    justify-content: center;
+    align-items: center;
   }
 `;
 
@@ -124,7 +135,9 @@ function Calender() {
                     }}
                   >
                     <Link to={`/toDotoDo/${dates.format("YYYYMMDD")}`}>
-                      <div>{dates.format("D")}</div>
+                      <div style={{ height: "100%", width: "100%" }}>
+                        {dates.format("D")}
+                      </div>
                     </Link>
                   </TableData>
                 );
