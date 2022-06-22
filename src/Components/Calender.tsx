@@ -95,7 +95,7 @@ const DaysData = styled.td`
 `;
 
 function Calender() {
-  const { date } = useParams();
+  const { dates } = useParams();
 
   const HOLIDAY_API_KEY =
     "EOZd3IRPE%2BLZivWRWYW%2BC1ekzk%2BjgpXQXVmPVP%2Beu%2BnkrNSTZZBYlRQLDSKl%2BjZE2q%2F%2BUBs2awMAq82WKHONJA%3D%3D";
@@ -128,6 +128,7 @@ function Calender() {
               if (moment().format("YYYYMMDD") === dates.format("YYYYMMDD")) {
                 return (
                   <TableData
+                    // dates={dates}
                     key={index}
                     style={{
                       color: "#f7b731",

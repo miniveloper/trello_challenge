@@ -57,8 +57,10 @@ const Location = styled.span`
   text-align: right;
 `;
 
-const Temperature = styled.span`
+const Temperature = styled.span<{ temp: number | undefined }>`
   font-size: 28px;
+  color: ${(props) =>
+    props.temp! >= 30 ? "#f78fb3" : props.temp! <= 5 ? "#2bcbba" : "white"};
 `;
 
 const WeatherBox = styled.div``;
@@ -149,31 +151,8 @@ function Weather() {
     <Wrapper>
       <Container>
         <WeatherBox>
-          <Icon>
-            {/* {icon === "clear sky" ? (
-              <WiDaySunny />
-            ) : icon === "few clouds" ? (
-              <WiDayCloudy />
-            ) : icon === "scattered clouds" ? (
-              <WiCloud />
-            ) : icon === "broken clouds" ? (
-              <WiCloudy />
-            ) : icon === "overcast clouds" ? (
-              <WiDaySunnyOvercast />
-            ) : icon === "shower rain" ? (
-              <WiRain />
-            ) : icon === "rain" ? (
-              <WiDayRainMix />
-            ) : icon === "thunderstrom" ? (
-              <WiThunderstorm />
-            ) : icon === "snow" ? (
-              <WiSnow />
-            ) : (
-              <WiFog />
-            )} */}
-            {getIcon()}
-          </Icon>
-          <Temperature>{temp?.temp}°</Temperature>
+          <Icon>{getIcon()}</Icon>
+          <Temperature temp={temp?.temp}>{temp?.temp}°</Temperature>
         </WeatherBox>
         <Location>@{name}</Location>
       </Container>

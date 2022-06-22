@@ -12,32 +12,61 @@ import { useParams } from "react-router-dom";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { isMobile } from "react-device-detect";
+import "../fonts/font.css";
 
 const Content = styled.div`
   position: relative;
   display: flex;
-  flex-direction: row;
   justify-content: space-evenly;
   align-items: center;
 `;
 
 const Wrapper = styled.div<IWidget>`
   position: relative;
-  display: flex;
-  width: 100vw;
+  display: grid;
   margin: 0 auto;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  grid-template-rows: 25% 1fr;
+  margin: 0 auto;
+
   height: 100vh;
   background-color: ${(props) => props.theme.bgColor};
 
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
   @media screen and (max-width: 480px) {
     height: 100%;
+    width: 100%;
+    display: flex;
+    margin: 0 auto;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 
     filter: ${(props) => (props.activate ? "blur(5px)" : "none")};
   }
 `;
+// const Wrapper = styled.div<IWidget>`
+//   position: relative;
+//   display: flex;
+//   margin: 0 auto;
+//   flex-direction: column;
+//   justify-content: center;
+//   align-items: center;
+//   height: 100vh;
+//   background-color: ${(props) => props.theme.bgColor};
+
+//   &::-webkit-scrollbar {
+//     display: none;
+//   }
+
+//   @media screen and (max-width: 480px) {
+//     height: 100%;
+
+//     filter: ${(props) => (props.activate ? "blur(5px)" : "none")};
+//   }
+// `;
 
 const Nav = styled.nav`
   display: none;
@@ -48,6 +77,21 @@ const Nav = styled.nav`
     font-size: 36px;
     color: white;
     align-items: center;
+  }
+`;
+
+const Title = styled.div`
+  color: #292929;
+  margin-left: 50px;
+  margin-top: 50px;
+
+  font-size: 48px;
+  font-weight: 500;
+  font-family: "Cookie";
+
+  @media screen and (max-width: 480px) {
+    font-size: 24px;
+    margin: 0 0 30px 0;
   }
 `;
 
@@ -108,10 +152,20 @@ const Boards = styled.div`
     flex-direction: column;
     align-items: center;
   }
+
+  /* @media screen and (max-width: 1260px) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  } */
 `;
 
 const Footer = styled.div`
+  display: none;
+
   @media screen and (max-width: 480px) {
+    display: block;
     width: 100%;
     height: 10vh;
   }
@@ -226,6 +280,10 @@ function Home() {
           <Nav>
             <FontAwesomeIcon icon={faBars} onClick={barsOnClick} />
           </Nav>
+          <Title>
+            {dates &&
+              `${dates.slice(4, 6)}월 ${dates.slice(6, 8)}일에 해야할 일 !`}
+          </Title>
           <Boards>
             {Object.keys(toDos).map((boardId) => (
               <Board
