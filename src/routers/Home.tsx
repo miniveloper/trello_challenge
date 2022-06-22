@@ -71,6 +71,7 @@ const Widget = styled.div<IWidget>`
   @media screen and (max-width: 480px) {
     display: ${(props) => (props.activate ? "block" : "none")};
     width: 80%;
+    height: 100%;
     position: absolute;
     right: 0;
     top: 0;
@@ -106,6 +107,13 @@ const Boards = styled.div`
   @media screen and (max-width: 480px) {
     flex-direction: column;
     align-items: center;
+  }
+`;
+
+const Footer = styled.div`
+  @media screen and (max-width: 480px) {
+    width: 100%;
+    height: 10vh;
   }
 `;
 
@@ -229,6 +237,8 @@ function Home() {
             ))}
           </Boards>
           <TrashCan />
+
+          <Footer />
         </Wrapper>
 
         <Widget activate={widget}>

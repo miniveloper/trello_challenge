@@ -5,6 +5,7 @@ import { Draggable } from "react-beautiful-dnd";
 import styled from "styled-components";
 import { useRecoilState } from "recoil";
 import { toDoState } from "../atoms";
+import { useParams } from "react-router-dom";
 
 const Card = styled.div<{ isDragging: boolean }>`
   display: flex;
@@ -27,18 +28,19 @@ export interface IDraggableCard {
 }
 
 function DraggableCard({ toDoId, toDoText, index, boardId }: IDraggableCard) {
+  const { dates } = useParams();
   const [toDos, setToDos] = useRecoilState(toDoState);
-  const onClickXmark = (event: React.MouseEvent<SVGElement>) => {
+  const onClickXmark = () => {
     setToDos((allBoards) => {
       const boardCopy = allBoards[boardId].slice();
       boardCopy.splice(index, 1);
-      // console.log(boardCopy);
 
-      // allBoards를 looping 돌려서 id가 boardId와 일치하는 경우 해당 board를 boardCopy로 바꿔준 뒤 반환해줘야 함
-      if (allBoards.key === boardId) {
-      }
+      localStorage.setItem(
+        `${dates}`,
+        JSON.stringify({ ...allBoards, [boardId]: boardCopy })
+      );
 
-      return { ...allBoards, boardCopy };
+      return { ...allBoards, [boardId]: boardCopy };
     });
   };
   return (
