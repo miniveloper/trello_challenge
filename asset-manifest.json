@@ -1,10 +1,15 @@
 {
   "files": {
-    "main.js": "/trello_challenge/static/js/main.e5128f40.js",
+    "main.css": "/trello_challenge/static/css/main.0493fab6.css",
+    "main.js": "/trello_challenge/static/js/main.5b9fea33.js",
+    "static/media/CookieRun Bold.woff": "/trello_challenge/static/media/CookieRun Bold.debae549c60bbc7202f0.woff",
+    "static/media/배스킨라빈스 B.woff": "/trello_challenge/static/media/배스킨라빈스 B.403368ada4ddf00f92dc.woff",
     "index.html": "/trello_challenge/index.html",
-    "main.e5128f40.js.map": "/trello_challenge/static/js/main.e5128f40.js.map"
+    "main.0493fab6.css.map": "/trello_challenge/static/css/main.0493fab6.css.map",
+    "main.5b9fea33.js.map": "/trello_challenge/static/js/main.5b9fea33.js.map"
   },
   "entrypoints": [
-    "static/js/main.e5128f40.js"
+    "static/css/main.0493fab6.css",
+    "static/js/main.5b9fea33.js"
   ]
 }
