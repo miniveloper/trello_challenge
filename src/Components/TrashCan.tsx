@@ -14,6 +14,10 @@ const Can = styled.div`
   padding: 0;
   bottom: 20px;
   right: 20px;
+
+  /* @media screen and (max-width: 480px) {
+    display: none;
+  } */
 `;
 
 function TrashCan() {

@@ -68,15 +68,22 @@ const Wrapper = styled.div<IWidget>`
 //   }
 // `;
 
-const Nav = styled.nav`
+const Nav = styled.nav<{ scroll: boolean }>`
   display: none;
 
   @media screen and (max-width: 480px) {
+    background-color: ${(props) => (props.scroll ? "#1F448D" : "transparent")};
+    position: sticky;
+    top: 0;
     display: flex;
+    width: 100%;
     height: 10vh;
     font-size: 36px;
     color: white;
     align-items: center;
+    justify-content: center;
+
+    transition: all 0.2s ease-in-out;
   }
 `;
 
@@ -133,14 +140,6 @@ const WidgetBox = styled.div`
   margin: 15px 0;
 `;
 
-const TempWidget = styled.span`
-  display: flex;
-  width: 100%;
-  padding: 0 50px;
-  justify-content: right;
-  align-items: flex-start;
-`;
-
 const Boards = styled.div`
   display: flex;
   justify-content: center;
@@ -178,6 +177,7 @@ interface IWidget {
 function Home() {
   const { dates } = useParams();
 
+  const [scroll, setScroll] = useState(false);
   const [widget, setWidget] = useState<boolean>(false);
   const [toDos, setToDos] = useRecoilState(toDoState);
   const onDragEnd = (info: DropResult) => {
@@ -255,6 +255,14 @@ function Home() {
     }
   };
 
+  const handleScroll = () => {
+    if (window.scrollY >= 10) {
+      setScroll(true);
+    } else {
+      setScroll(false);
+    }
+  };
+
   useEffect(() => {
     const storage = localStorage.getItem(`${dates}`);
 
@@ -268,6 +276,11 @@ function Home() {
         Done: [],
       });
     }
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, [dates]);
 
   return (
@@ -277,12 +290,14 @@ function Home() {
           activate={widget}
           {...(isMobile && { onClick: isMobileActivate })}
         >
-          <Nav>
+          <Nav scroll={scroll}>
             <FontAwesomeIcon icon={faBars} onClick={barsOnClick} />
           </Nav>
           <Title>
             {dates &&
-              `${dates.slice(4, 6)}월 ${dates.slice(6, 8)}일에 해야할 일 !`}
+              `${
+                new Date().getMonth() + 1
+              }월 ${new Date().getDate()}일에 해야할 일 !`}
           </Title>
           <Boards>
             {Object.keys(toDos).map((boardId) => (

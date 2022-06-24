@@ -35,6 +35,11 @@ export const trashState = atom<ITrash[]>({
   default: [],
 });
 
+export const dragState = atom({
+  key: "Drag",
+  default: false,
+});
+
 export let weatherState = atom({
   key: "weather",
   default: {

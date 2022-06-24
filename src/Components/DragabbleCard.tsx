@@ -4,7 +4,7 @@ import React from "react";
 import { Draggable } from "react-beautiful-dnd";
 import styled from "styled-components";
 import { useRecoilState } from "recoil";
-import { toDoState } from "../atoms";
+import { dragState, toDoState } from "../atoms";
 import { useParams } from "react-router-dom";
 
 const Card = styled.div<{ isDragging: boolean }>`
@@ -30,6 +30,7 @@ export interface IDraggableCard {
 function DraggableCard({ toDoId, toDoText, index, boardId }: IDraggableCard) {
   const { dates } = useParams();
   const [toDos, setToDos] = useRecoilState(toDoState);
+  const [drag, setDrag] = useRecoilState(dragState);
   const onClickXmark = () => {
     setToDos((allBoards) => {
       const boardCopy = allBoards[boardId].slice();
@@ -43,6 +44,7 @@ function DraggableCard({ toDoId, toDoText, index, boardId }: IDraggableCard) {
       return { ...allBoards, [boardId]: boardCopy };
     });
   };
+
   return (
     <Draggable key={toDoId} draggableId={toDoId + ""} index={index}>
       {(magic, snapshot) => (

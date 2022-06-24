@@ -128,7 +128,6 @@ function Calender() {
               if (moment().format("YYYYMMDD") === dates.format("YYYYMMDD")) {
                 return (
                   <TableData
-                    // dates={dates}
                     key={index}
                     style={{
                       color: "#f7b731",
